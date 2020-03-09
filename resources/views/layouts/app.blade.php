@@ -60,6 +60,7 @@
         @include('layouts.aside')
         
     </div><!-- /.row -->
+    <br>
 </main><!-- /.container -->
 
 @include('layouts.footer')

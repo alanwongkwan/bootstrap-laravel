@@ -31,6 +31,7 @@
           </li>
         </ul>
       </article>
-
+      
+      <a href="{{ route('article.edit', $article) }}"><button type="button" class="btn btn-warning">изменить статью</button></a>
 
 @endsection

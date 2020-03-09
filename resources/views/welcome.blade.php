@@ -39,5 +39,5 @@
         <p>Its empty, try again!</p>	
     
       @endforelse
-
+      {{ $articles->links() }}
 @endsection

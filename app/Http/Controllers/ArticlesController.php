@@ -40,6 +40,18 @@ class ArticlesController extends Controller
         return redirect()->route('welcome');
     }
 
+    public function edit(Article $article)
+    {
+        return view('articles.edit', compact('article'));
+    }
+
+    public function update(Article $article)
+    {
+        $article->update($this->validateArticle());
+
+        return redirect(route('article.show', $article));
+    }
+
     protected function validateArticle()
     {
         return request()->validate([
