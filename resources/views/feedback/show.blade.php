@@ -25,7 +25,29 @@
           </li>
         </ul>
       </article>
-      <a href="{{ route('page.feedback') }}">вернуться</a>
+
+      <div>
+        <a href="{{ route('feedback.edit', $feedback) }}" type="button" class="btn btn-warning">изменить отзыв</a>
+      </div>
+      
+      <br>
+      <form method="POST" action="{{ route('feedback.destroy', $feedback) }}">
+        @csrf
+        @method('delete')
+        <button id = "deleted2" type="submit" class="btn btn-danger">Удалить отзыв</button>
+      </form>
+
+      <script>
+        let button = document.querySelector("#deleted2");
+        button.addEventListener("click", function() {
+         let del = confirm('Уверены? Это не обратимый процес!!!');
+         if (del === false) {
+          event.preventDefault();
+         }
+        });
+      </script>
+
+      <a href="{{ route('page.feedback') }}">все отзывы</a>
 
 
 @endsection

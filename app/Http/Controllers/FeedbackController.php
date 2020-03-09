@@ -30,11 +30,41 @@ class FeedbackController extends Controller
 
         return redirect()->route('page.contacts');
     }
+    // =====================================================================
+    public function edit(Feedback $feedback)
+    {
+        return view('feedback.edit', compact('feedback'));
+    }
+
+    public function update(Feedback $feedback)
+    {
+        $feedback->update($this->validateUpdateFeedback());
+
+        return redirect(route('feedback.show', $feedback));
+    }
+
+    public function destroy($feedback)
+    {
+        $post = Feedback::find($feedback);
+        if ($post) {
+            $post->delete();
+        }
+
+        return redirect()->route('page.feedback');
+    }
 
     protected function validateFeedback()
     {
         return request()->validate([
             'email' => 'required|unique:feedback,email',
+            'message' => ['required', 'min:10']
+        ]);
+    }
+
+    protected function validateUpdateFeedback()
+    {
+        return request()->validate([
+            'email' => 'required',
             'message' => ['required', 'min:10']
         ]);
     }

@@ -52,6 +52,16 @@ class ArticlesController extends Controller
         return redirect(route('article.show', $article));
     }
 
+    public function destroy($article)
+    {
+        $post = Article::find($article);
+        if ($post) {
+            $post->delete();
+        }
+
+        return redirect()->route('welcome');
+    }
+
     protected function validateArticle()
     {
         return request()->validate([

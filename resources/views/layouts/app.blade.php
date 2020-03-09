@@ -12,6 +12,7 @@
 
     <!-- Bootstrap core CSS -->
   <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
+  <script src="{{ asset('js/app.js') }}"></script> 
 
     <!-- Favicons -->
 <link rel="apple-touch-icon" href="/docs/4.4/assets/img/favicons/apple-touch-icon.png" sizes="180x180">

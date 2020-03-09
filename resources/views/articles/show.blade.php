@@ -31,7 +31,26 @@
           </li>
         </ul>
       </article>
+      <div>
+        <a href="{{ route('article.edit', $article) }}" type="button" class="btn btn-warning">изменить статью</a>
+      </div>
       
-      <a href="{{ route('article.edit', $article) }}"><button type="button" class="btn btn-warning">изменить статью</button></a>
+      <br>
+      <form method="POST" action="{{ route('article.destroy', $article) }}">
+        @csrf
+        @method('delete')
+        <button id = "deleted" type="submit" class="btn btn-danger">Удалить статью</button>
+      </form>
 
+      <script>
+        let button = document.querySelector("#deleted");
+        button.addEventListener("click", function() {
+         let del = confirm('Уверены? Это не обратимый процес!!!');
+         if (del === false) {
+          event.preventDefault();
+         }
+        });
+      </script>
+
+      
 @endsection
