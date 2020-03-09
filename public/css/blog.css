@@ -33,6 +33,11 @@ h6 {
     }
 }
 
+img {
+    max-width: 100%;
+    height: auto;
+}
+
 .nav-scroller {
     position: relative;
     z-index: 2;

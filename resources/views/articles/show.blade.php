@@ -1,13 +1,8 @@
- @extends('layouts.app')
+@extends('layouts.app')
 
-@section('title', 'Главная')
+@section('title', "Статья " . $article->title)
 
 @section('content')
-      <h3 class="pb-4 mb-4 font-italic border-bottom">
-        Все новости
-      </h3>
-
-      @forelse ($articles as $article)
       <article class="main-post blog-list-full-width">
         <div class="featured-post">
           <a href="#" title="">
@@ -16,11 +11,13 @@
         </div><!-- /.featured-post -->
         <div class="entry-content">
           <h2>
-            <a href="{{ route('article.show', $article) }}" title="">{{ $article->title }}</a>
+            {{ $article->title }}
           </h2>
-          <p>
-            {{ $article->excerpt }}
-          </p>
+          {{-- сейчас тело статьи вывожу с костылем. В базе текст с тегами, надо решить как это обойти --}}
+          <div>
+            {!! $article->body !!}
+          </div>
+          
         </div><!-- /.entry-content -->
         <ul class="list-inline">
           <li class="list-inline-item">
@@ -34,10 +31,6 @@
           </li>
         </ul>
       </article>
-      <hr>
-      @empty
-        <p>Its empty, try again!</p>	
-    
-      @endforelse
+
 
 @endsection
