@@ -19,8 +19,9 @@
     <div class="nav-scroller py-1 mb-2">
       <nav class="nav d-flex justify-content-between">
         <a class="p-2 text-muted" href="{{ route('welcome') }}">Главная</a>
+        <a class="p-2 text-muted" href="{{ route('article.index') }}">Все новости</a>
         <a class="p-2 text-muted" href="{{ route('page.about') }}">О нас</a>
-        <a class="p-2 text-muted" href="{{ route('page.contacts') }}">Контакты</a>
+        <a class="p-2 text-muted" href="{{ route('page.contacts') }}">Контакты feedback</a>
         <a class="p-2 text-muted" href="{{ route('article.create') }}">Добавить статью</a>
         <a class="p-2 text-muted" href="{{ route('page.admin') }}">Админка</a>
         <a class="p-2 text-muted" href="{{ route('page.feedback') }}">Отзывы</a>

@@ -10,6 +10,7 @@ Route::get('/', function () {
 
 // Route::get('/articles', 'ArticlesController@index')->name('articles.index');
 
+Route::get('/articles', 'ArticlesController@index')->name('article.index');
 Route::post('/articles', 'ArticlesController@store')->name('article.store');
 Route::get('/articles/create', 'ArticlesController@create')->name('article.create');
 Route::get('/articles/{article}', 'ArticlesController@show')->name('article.show');

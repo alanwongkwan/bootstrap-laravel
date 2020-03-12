@@ -83,17 +83,17 @@
 
                 <div class="form-group">
                     <label for="imgInput">Тэги</label>
-                    <input 
-                        type="text" 
-                        placeholder = "tag"
-                        class="form-control @error('tag') border-danger @enderror" 
-                        name="tag" 
-                        id="imgInput"
-                        value="{{ $article->tag }}">
+                    <p>При изменении статьи все теги нужно выбрать заново иначе все удалится</p>
+                    <select name="tags[]" multiple>
+                        @foreach ($tags as $tag)
+                            <option value="{{ $tag->id }}">{{ $tag->name }}</option>
+                            
+                        @endforeach
+                    </select>
 
-                    @error('tag')
-                        <p class="text-danger">{{ $errors->first('tag') }}</p>
-                    @enderror
+                    @if ($errors->has('tags'))
+                        <p class="text-danger">{{ $message }}</p>
+                    @endif
                 </div>
 
                 <button type="submit" class="btn btn-primary">Изменить</button>

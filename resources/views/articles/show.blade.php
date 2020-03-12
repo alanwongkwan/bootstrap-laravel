@@ -10,6 +10,10 @@
           </a>
         </div><!-- /.featured-post -->
         <div class="entry-content">
+          <p>Теги статьи</p>
+          @foreach ($article->tags as $tag)
+        <a class="text-info" href="/articles?tag={{ $tag->name }}">{{ $tag->name }}</a>,
+          @endforeach
           <h2>
             {{ $article->title }}
           </h2>

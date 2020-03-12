@@ -4,12 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use \App\Article;
+use \App\Tag;
 
 class ArticlesController extends Controller
 {
     public function index()
     {
-        $articles = Article::latest()->get();
+        if (request('tag')) {
+            $articles = Tag::where('name', request('tag'))->firstOrFail()->articles()->paginate(5);
+        } else {
+            $articles = Article::latest()->paginate(5);
+        }
 
         return view('articles.index', compact('articles'));
     }
@@ -21,33 +26,35 @@ class ArticlesController extends Controller
 
     public function create()
     {
-        return view('articles.create');
+        $tags = Tag::all();
+        return view('articles.create', compact('tags'));
     }
 
     public function store()
     {
-        $article = new Article($this->validateArticle());
+        $this->validateArticle();
 
-        $article->title = request('title');
-        $article->thumbnail = request('thumbnail');
-        $article->img = request('img');
-        $article->excerpt = request('excerpt');
-        $article->body = request('body');
-        $article->tag = request('tag');
-
+        $article = new Article(request(['title', 'thumbnail', 'img', 'excerpt', 'body']));
         $article->save();
+
+        $article->tags()->attach(request('tags'));
 
         return redirect()->route('welcome');
     }
 
     public function edit(Article $article)
     {
-        return view('articles.edit', compact('article'));
+        $tags = Tag::all();
+        return view('articles.edit', compact('article', 'tags'));
     }
 
     public function update(Article $article)
     {
-        $article->update($this->validateArticle());
+        $this->validateArticle();
+        $article->update(request(['title', 'thumbnail', 'img', 'excerpt', 'body']));
+        // удаляем все теги и записываем по новой
+        $article->tags()->detach();
+        $article->tags()->attach(request('tags'));
 
         return redirect(route('article.show', $article));
     }
@@ -70,7 +77,7 @@ class ArticlesController extends Controller
             'img' => 'required',
             'excerpt' => ['required', 'min:10', 'max:255'],
             'body' => ['required', 'min:10'],
-            'tag' => 'required'
+            'tags' => 'exists:tags,id'
         ]);
     }
 }
