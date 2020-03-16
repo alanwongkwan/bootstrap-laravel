@@ -31,3 +31,7 @@ Route::delete('/feedback/{feedback}', 'FeedbackController@destroy')->name('feedb
 Route::get('/contacts', 'PagesController@contacts')->name('page.contacts');
 Route::get('/about', 'PagesController@about')->name('page.about');
 Route::get('/admin', 'PagesController@admin')->name('page.admin');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

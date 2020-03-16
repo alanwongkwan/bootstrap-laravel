@@ -35,6 +35,7 @@
           </li>
         </ul>
       </article>
+      @auth
       <div>
         <a href="{{ route('article.edit', $article) }}" type="button" class="btn btn-warning">изменить статью</a>
       </div>
@@ -45,7 +46,8 @@
         @method('delete')
         <button id = "deleted" type="submit" class="btn btn-danger">Удалить статью</button>
       </form>
-
+      @endauth
+      
       <script>
         let button = document.querySelector("#deleted");
         button.addEventListener("click", function() {
